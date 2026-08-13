@@ -1,0 +1,24 @@
+# Chỉ chạy MySQL cho local dev — KHÔNG dùng khi deploy lên EC2 (production
+# dùng RDS thật). Engine mysql:8.0 khớp RDS engine đã chốt trong lab.
+services:
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: guestbook
+      MYSQL_USER: guestbook
+      MYSQL_PASSWORD: guestbook_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:

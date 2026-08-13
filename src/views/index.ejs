@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cloud Mentor Pro — Guestbook</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <!-- Pico.css: base polish cho input/textarea/button/file input (không cần build step,
+       chỉ load ở browser nên không ảnh hưởng Golden AMI). style.css load sau để override
+       màu thương hiệu (navy/teal/purple) đè lên theme mặc định của Pico. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <span class="brand-name">Cloud Mentor Pro</span>
+      <span class="brand-tag">GUESTBOOK</span>
+    </div>
+    <div class="badges">
+      <span class="badge <%= dbOk ? 'ok' : 'err' %>">
+        <span class="dot"></span>
+        Database: <%= dbOk ? 'Connected' : 'Disconnected' %>
+      </span>
+      <span class="badge info">
+        <span class="dot"></span>
+        Instance: <%= instanceId %>
+      </span>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="card">
+      <h2>✍️ Để lại lời nhắn</h2>
+      <form id="guestbook-form">
+        <label for="name">Tên của bạn</label>
+        <input type="text" id="name" name="name" maxlength="100" placeholder="Nguyễn Văn A" required />
+
+        <label for="message">Lời nhắn</label>
+        <textarea id="message" name="message" maxlength="255" placeholder="Chúc lớp học vui vẻ!"></textarea>
+
+        <label for="image">Ảnh (tuỳ chọn — upload thẳng lên S3)</label>
+        <input type="file" id="image" name="image" accept="image/*" />
+
+        <button type="submit" class="btn-primary" id="submit-btn">Gửi lời nhắn</button>
+        <div class="form-msg" id="form-msg"></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2>📖 Lưu bút gần đây</h2>
+        <span class="count-pill"><%= entries.length %> entries</span>
+      </div>
+
+      <% if (entries.length === 0) { %>
+        <p class="empty-state">Chưa có lời nhắn nào. Hãy là người đầu tiên!</p>
+      <% } else { %>
+        <% entries.forEach(function(entry) { %>
+          <div class="entry">
+            <% if (entry.imageUrl) { %>
+              <img class="entry-thumb" src="<%= entry.imageUrl %>" alt="" />
+            <% } else { %>
+              <span class="entry-avatar"><%= entry.name.charAt(0).toUpperCase() %></span>
+            <% } %>
+            <div class="entry-body">
+              <span class="entry-name"><%= entry.name %></span>
+              <span class="entry-time"> · <%= new Date(entry.created_at).toLocaleString('vi-VN') %></span>
+              <% if (entry.message) { %>
+                <p class="entry-message"><%= entry.message %></p>
+              <% } %>
+            </div>
+          </div>
+        <% }); %>
+      <% } %>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Cloud Mentor Pro Guestbook — AWS SAA Lab demo · served by <strong><%= instanceId %></strong>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

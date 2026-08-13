@@ -1,0 +1,355 @@
+/* Cloud Mentor Pro Guestbook — brand colors
+   Nền: xám nhẹ / trắng, hoặc navy đậm (#151035)
+   Nhấn: teal #32EFB9 (dùng trên nền tối) | purple #5F56D9 (dùng trên nền sáng) */
+
+:root {
+  /* Pico.css tự tăng font-size gốc của <html> theo breakpoint (tới 131% ở
+     màn hình rộng) — khoá lại 100% để rem trong style.css không bị phóng to
+     ngoài ý muốn. */
+  --pico-font-size: 100%;
+
+  --navy: #151035;
+  --navy-soft: #221c4d;
+  --teal: #32efb9;
+  --purple: #5f56d9;
+  --purple-dark: #4a42b0;
+
+  --bg-page: #f5f5f7;
+  --bg-card: #ffffff;
+  --text-main: #151035;
+  --text-muted: #6b6785;
+  --border-soft: #e5e3f0;
+
+  --ok: #1fbf88;
+  --err: #e5484d;
+
+  --radius: 18px;
+  --shadow: 0 16px 40px rgba(21, 16, 53, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+a {
+  color: var(--purple);
+}
+
+.header {
+  background: var(--navy);
+  color: #fff;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header .brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.header .brand-name {
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.header .brand-tag {
+  color: var(--teal);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(50, 239, 185, 0.35);
+  color: #fff;
+}
+
+.badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.badge.ok .dot {
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal);
+}
+
+.badge.err .dot {
+  background: var(--err);
+  box-shadow: 0 0 8px var(--err);
+}
+
+.badge.info .dot {
+  background: var(--purple);
+  box-shadow: 0 0 8px #8f87ea;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  margin-bottom: 28px;
+  border: 1px solid var(--border-soft);
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin: 20px 0 8px;
+}
+
+label:first-of-type {
+  margin-top: 4px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-soft);
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: var(--bg-page);
+  color: var(--text-main);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+input[type="text"]:hover,
+textarea:hover {
+  border-color: #cfcbe8;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 4px rgba(95, 86, 217, 0.14);
+}
+
+input[type="file"] {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Nút "Choose File" theo brand purple thay vì nút xám mặc định của OS */
+input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--purple);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: var(--purple-dark);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+}
+
+.btn-primary {
+  margin-top: 24px;
+  width: 100%;
+  padding: 13px 16px;
+  border: none;
+  border-radius: 12px;
+  background: var(--purple);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(95, 86, 217, 0.3);
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--purple-dark);
+  box-shadow: 0 12px 28px rgba(95, 86, 217, 0.38);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 6px 16px rgba(95, 86, 217, 0.3);
+}
+
+.btn-primary:disabled {
+  background: #b9b5e8;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.form-msg {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.form-msg.ok {
+  color: var(--ok);
+}
+
+.form-msg.err {
+  color: var(--err);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.section-title h2 {
+  margin: 0;
+}
+
+.count-pill {
+  background: rgba(95, 86, 217, 0.1);
+  color: var(--purple);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.entry {
+  padding: 16px 4px;
+  margin: 0 -4px;
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  gap: 14px;
+  border-radius: 10px;
+  transition: background 0.15s ease;
+}
+
+.entry:hover {
+  background: var(--bg-page);
+}
+
+.entry:last-child {
+  border-bottom: none;
+}
+
+.entry-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg-page);
+  border: 1px solid var(--border-soft);
+}
+
+.entry-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--purple), var(--navy-soft));
+}
+
+.entry-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.entry-name {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.entry-time {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.entry-message {
+  margin: 4px 0 0;
+  color: var(--text-main);
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+
+.empty-state {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.footer {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 18px;
+  font-size: 0.78rem;
+}
+
+.footer strong {
+  color: var(--teal);
+}
