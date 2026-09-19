@@ -1,9 +1,6 @@
 # Cloud Mentor Pro Guestbook (cmp-guestbook-app)
 
-Source code ứng dụng demo "Guestbook" dùng cho bài lab **cmp-guestbook-doc**
-(AWS SAA — Load Balancer & Auto Scaling Group, Cloud Mentor Pro). Repo
-này độc lập với repo lab — App instance trong lab sẽ `git clone`/`git
-pull` trực tiếp từ repo GitHub này lúc khởi động.
+3-tier web application architecture with High Availability and Scalability
 
 ## Tính năng
 
@@ -25,11 +22,6 @@ src/
 └── public/          # CSS (brand color Cloud Mentor Pro) + JS client (upload flow)
 ```
 
-**Bảng màu thương hiệu** dùng trong `public/css/style.css`:
-navy `#151035` (nền header/footer), teal `#32EFB9` (nhấn trên nền tối),
-purple `#5F56D9` (nhấn trên nền sáng — nút, focus input), nền trang
-xám nhẹ `#F5F5F7` với card trắng.
-
 ## Cách app này được deploy trong lab
 
 - **AMI (runtime)** và **code app (repo này)** tách biệt hoàn toàn: Golden
@@ -44,7 +36,7 @@ xám nhẹ `#F5F5F7` với card trắng.
   version mới + Instance Refresh) — xem chi tiết trong repo lab
   `cmp-guestbook-doc`, thư mục `docs/08` và `docs/09`.
 
-## API endpoints (dự kiến)
+## API endpoints
 
 ```
 GET  /          → Trang chủ: status DB, danh sách guestbook entries (mới nhất trước)
@@ -88,7 +80,9 @@ AWS_REGION=<region>
 2. **S3 (tuỳ chọn — chỉ cần nếu muốn test upload ảnh):** tạo thủ công 1
    bucket dev thật trên AWS (tách biệt bucket của CloudFormation lab,
    đặt tên theo convention `local-guestbook-s3-{your-aws-account-id}`
-   — xem `.env.example`). Vào bucket → tab **Permissions** → mục
+   — xem `.env.example`). 
+   
+   Vào bucket → tab **Permissions** → mục
    **Cross-origin resource sharing (CORS)** → dán nguyên văn:
    ```json
    [
